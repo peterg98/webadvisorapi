@@ -98,12 +98,12 @@ WSGI_APPLICATION = 'webadvisorapi.wsgi.application'
 
 #SQLite configuration
 
-DATABASES = { 
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+# DATABASES = { 
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 # if DEBUG:
 #     #Postgres configuration
@@ -131,8 +131,11 @@ DATABASES = {
 #     db_from_env = dj_database_url.config(conn_max_age=600)
 #     DATABASES['default'].update(db_from_env)
 
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
+# db_from_env = dj_database_url.config()
+# DATABASES['default'].update(db_from_env)
+
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
