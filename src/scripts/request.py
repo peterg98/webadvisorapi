@@ -46,7 +46,7 @@ class CourseScraper:
         
     async def queryCourses(self):
         #set headless=True when in production
-        self.browser = await launch(headless=True, args=['--disable-dev-shm-usage', '--no-sandbox', '--disable-setuid-sandbox']) #Chromium will run out of memory when doing memory-intensive functions, so disable the limit
+        self.browser = await launch(headless=True, args=['--disable-dev-shm-usage', '--no-sandbox', '--disable-setuid-sandbox'], ignoreHTTPSErrors=True) #Chromium will run out of memory when doing memory-intensive functions, so disable the limit
         #Incognito might not be needed when disabling browser cache
         self.context = await self.browser.createIncognitoBrowserContext()  
         self.page = await self.context.newPage()
@@ -55,7 +55,6 @@ class CourseScraper:
         await self.page.goto(
             'https://advisor.uog.edu/WebAdvisor/WebAdvisor?CONSTITUENCY=WBST&type=P&pid=ST-WESTS12A&TOKENIDX=', 
             waitUntil=['networkidle0', 'domcontentloaded', 'load'],
-            ignoreHTTPSErrors=True
             )
 
         async def isTermAvailable():
@@ -73,7 +72,7 @@ class CourseScraper:
         await self.page.select('#VAR7', '05:00')
         await self.page.select('#VAR8', '22:00')
         await asyncio.gather(
-            self.page.waitForNavigation(waituntil=['networkidle0', 'domcontentloaded', 'load'], ignoreHTTPSErrors=True),
+            self.page.waitForNavigation(waituntil=['networkidle0', 'domcontentloaded', 'load']),
             self.page.click('.shortButton')
         )
         try:
