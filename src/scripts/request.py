@@ -54,7 +54,8 @@ class CourseScraper:
         
         await self.page.goto(
             'https://advisor.uog.edu/WebAdvisor/WebAdvisor?CONSTITUENCY=WBST&type=P&pid=ST-WESTS12A&TOKENIDX=', 
-            waitUntil=['networkidle0', 'domcontentloaded', 'load']
+            waitUntil=['networkidle0', 'domcontentloaded', 'load'],
+            ignoreHTTPSErrors=True
             )
 
         async def isTermAvailable():
