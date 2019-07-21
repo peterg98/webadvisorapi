@@ -46,7 +46,7 @@ class CourseScraper:
         
     async def queryCourses(self):
         #set headless=True when in production
-        self.browser = await launch(headless=True, args=['--disable-dev-shm-usage']) #Chromium will run out of memory when doing memory-intensive functions, so disable the limit
+        self.browser = await launch(headless=True, args=['--disable-dev-shm-usage', '--no-sandbox', '--disable-setuid-sandbox']) #Chromium will run out of memory when doing memory-intensive functions, so disable the limit
         #Incognito might not be needed when disabling browser cache
         self.context = await self.browser.createIncognitoBrowserContext()  
         self.page = await self.context.newPage()
