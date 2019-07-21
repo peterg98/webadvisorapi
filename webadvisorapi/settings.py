@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = '&p9a(12jysotvxqkm+l8ip*uliw9((2pplz700=0kj&4+@ydz&'
 
-DEBUG = True
+DEBUG = False
 if DEBUG:
     SECRET_KEY = '&p9a(12jysotvxqkm+l8ip*uliw9((2pplz700=0kj&4+@ydz&'
     ALLOWED_HOSTS = ['*']
@@ -99,40 +99,41 @@ WSGI_APPLICATION = 'webadvisorapi.wsgi.application'
 
 #SQLite configuration
 
-""" DATABASES = { 
+DATABASES = { 
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-} """
+}
 
-if DEBUG:
-    #Postgres configuration
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'test_db',
-            'USER': 'postgres',
-            'PASSWORD': 'postgres',
-            'HOST': 'localhost',
-            'PORT': '5432',
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ['DATABASE_NAME'],
-            'USER': os.environ['DATABASE_USER'],
-            'PASSWORD': os.environ['DATABASE_USER_PASSWORD'],
-            'HOST': os.environ['HOST'],
-            'PORT': '5432',
-        }
-    }
-    db_from_env = dj_database_url.config(conn_max_age=600)
-    DATABASES['default'].update(db_from_env)
+# if DEBUG:
+#     #Postgres configuration
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'NAME': 'test_db',
+#             'USER': 'postgres',
+#             'PASSWORD': 'postgres',
+#             'HOST': 'localhost',
+#             'PORT': '5432',
+#         }
+#     }
+# else:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'NAME': os.environ['DATABASE_NAME'],
+#             'USER': os.environ['DATABASE_USER'],
+#             'PASSWORD': os.environ['DATABASE_USER_PASSWORD'],
+#             'HOST': os.environ['HOST'],
+#             'PORT': '5432',
+#         }
+#     }
+#     db_from_env = dj_database_url.config(conn_max_age=600)
+#     DATABASES['default'].update(db_from_env)
 
-
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
