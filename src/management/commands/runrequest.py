@@ -10,10 +10,12 @@ class Command(BaseCommand):
         parser.add_argument('minutes', type=int)
 
     def handle(self, *args, **options):
-        while True:
-            try:
-                request.main()
-            except:
-                pass
-            time.sleep(options['minutes'] * 60)
+        # while True:
+        #     try:
+        #         request.main()
+        #     except:
+        #         pass
+        #     time.sleep(options['minutes'] * 60)
+        print("Runrequest is being run")
+        request.main()
         
