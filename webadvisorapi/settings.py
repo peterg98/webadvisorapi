@@ -24,16 +24,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECRET_KEY = '&p9a(12jysotvxqkm+l8ip*uliw9((2pplz700=0kj&4+@ydz&'
 
 DEBUG = False
-if DEBUG:
-    SECRET_KEY = '&p9a(12jysotvxqkm+l8ip*uliw9((2pplz700=0kj&4+@ydz&'
-    ALLOWED_HOSTS = ['*']
-    ROOT_URLCONF = 'webadvisorapi.urls'
-else:   
-    SECRET_KEY = os.environ.get('SECRET_KEY')
-    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-    ALLOWED_HOSTS = ['localhost', 'webadvisorapitest.herokuapp.com']
-    ROOT_URLCONF = 'webadvisorapi.urls'
+SECRET_KEY = '&p9a(12jysotvxqkm+l8ip*uliw9((2pplz700=0kj&4+@ydz&'
+ALLOWED_HOSTS = ['*']
+ROOT_URLCONF = 'webadvisorapi.urls'
+# else:   
+#     SECRET_KEY = os.environ.get('SECRET_KEY')
+#     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+#     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+#     ALLOWED_HOSTS = ['localhost', 'webadvisorapitest.herokuapp.com']
+#     ROOT_URLCONF = 'webadvisorapi.urls'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
