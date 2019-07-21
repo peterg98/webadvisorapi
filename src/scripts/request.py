@@ -72,7 +72,7 @@ class CourseScraper:
         await self.page.select('#VAR7', '05:00')
         await self.page.select('#VAR8', '22:00')
         await asyncio.gather(
-            self.page.waitForNavigation(waituntil=['networkidle0', 'domcontentloaded', 'load']),
+            self.page.waitForNavigation(waituntil=['networkidle0', 'domcontentloaded', 'load'], ignoreHTTPSErrors=True),
             self.page.click('.shortButton')
         )
         try:
