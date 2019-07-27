@@ -7,7 +7,7 @@ import re
 from pyppeteer.errors import NetworkError
 
 PAGE_LIMIT_REGEX = r'Page (\d+) of (\d+)'
-COURSE_SECTION_REGEX = r'([a-zA-Z0-9]+-[a-zA-Z0-9]+)-([a-zA-Z0-9]+)'
+COURSE_SECTION_REGEX = r'([a-zA-Z0-9\s]+-[a-zA-Z0-9\s]+)-([a-zA-Z0-9\s]+)'
 
 BASE_WEBADVISOR_URL = 'https://advisor.uog.edu/WebAdvisor/WebAdvisor'
 SECTION_DETAIL_URL_REGEX = r"'(.*?)'"
