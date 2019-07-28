@@ -117,8 +117,8 @@ class CourseScraper:
                 status, section_name_and_title, location, faculty, \
                 max_capacity, credits_, academic_level = [await self.querySelectorHelper(i, pattern) for pattern in PATTERN_IDS]
                 
-                section_name_and_title = section_name_and_title.split(' ')
-                name, title = section_name_and_title[0], ' '.join(section_name_and_title[2:])
+                section_name_and_title_split = section_name_and_title.split(' ')
+                name, title = section_name_and_title_split[0], ' '.join(section_name_and_title_split[2:])
                 #Get the onclick attribute of an element; there seems to be no other way to get this attribute with only pyppeteer
                 detail_url_segment = await self.page.evaluate('''() => document.querySelector('%s').getAttribute('onclick')''' % (SECTION_TITLE_ID + str(i)))
                 detail_url_segment = re.findall(SECTION_DETAIL_URL_REGEX, detail_url_segment)[0]
@@ -128,7 +128,7 @@ class CourseScraper:
                     available, capacity = map(lambda c: int(c), max_capacity.strip().split('/'))
                 except ValueError:
                     available, capacity = 0, 0
-                course, section = re.match(COURSE_SECTION_REGEX, name).groups()
+                course, section = re.match(COURSE_SECTION_REGEX, section_name_and_title).groups()
                 credits_ = int(float(credits_))
 
                 description, meeting_info, requisite_courses, phone, extension, \

@@ -9,8 +9,6 @@ https://docs.djangoproject.com/en/2.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
-import django_heroku
-import dj_database_url
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -21,28 +19,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = '&p9a(12jysotvxqkm+l8ip*uliw9((2pplz700=0kj&4+@ydz&'
-
-DEBUG = False
 SECRET_KEY = '&p9a(12jysotvxqkm+l8ip*uliw9((2pplz700=0kj&4+@ydz&'
+
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 ROOT_URLCONF = 'webadvisorapi.urls'
-# else:   
-#     SECRET_KEY = os.environ.get('SECRET_KEY')
-#     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-#     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-#     ALLOWED_HOSTS = ['localhost', 'webadvisorapitest.herokuapp.com']
-#     ROOT_URLCONF = 'webadvisorapi.urls'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-
-DOCKER = False #Set to true if using Docker
-
-# ALLOWED_HOSTS = ['*']
-
 CORS_ORIGIN_ALLOW_ALL = DEBUG
-CORS_ALLOW_CREDENTIALS = False
+CORS_ALLOW_CREDENTIALS = True
 # Application definition
 
 INSTALLED_APPS = [
@@ -56,6 +42,12 @@ INSTALLED_APPS = [
     'src.apps.SrcConfig',
     'corsheaders',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ]
+}
 
 MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -105,37 +97,17 @@ WSGI_APPLICATION = 'webadvisorapi.wsgi.application'
 #     }
 # }
 
-# if DEBUG:
-#     #Postgres configuration
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql',
-#             'NAME': 'test_db',
-#             'USER': 'postgres',
-#             'PASSWORD': 'postgres',
-#             'HOST': 'localhost',
-#             'PORT': '5432',
-#         }
-#     }
-# else:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql',
-#             'NAME': os.environ['DATABASE_NAME'],
-#             'USER': os.environ['DATABASE_USER'],
-#             'PASSWORD': os.environ['DATABASE_USER_PASSWORD'],
-#             'HOST': os.environ['HOST'],
-#             'PORT': '5432',
-#         }
-#     }
-#     db_from_env = dj_database_url.config(conn_max_age=600)
-#     DATABASES['default'].update(db_from_env)
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'test_db',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
 
-# db_from_env = dj_database_url.config()
-# DATABASES['default'].update(db_from_env)
-
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
@@ -182,5 +154,3 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
-
-django_heroku.settings(locals()) 
