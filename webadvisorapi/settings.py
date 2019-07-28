@@ -19,7 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
-
+SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = False
 ALLOWED_HOSTS = ['uogwebadvisorapi.herokuapp.com']
 ROOT_URLCONF = 'webadvisorapi.urls'
